@@ -1,3 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendo Learning Zone</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Login Page -->
+    <section id="login" class="page">
+      <h1>Login</h1>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <!-- Admin Page -->
+    <section id="admin" class="page hidden">
+      <h1>Admin Panel</h1>
+      <div>
+        <label>Configure Access:</label>
+        <textarea id="accessConfig"></textarea>
+        <button onclick="saveAccessConfig()">Save</button>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav id="nav" class="hidden">
+      <button onclick="navigate('dashboard1')">Overview</button>
+      <button onclick="navigate('dashboard2')">Analytics</button>
+      <button onclick="navigate('dashboard3')">Reports</button>
+      <button onclick="navigate('dashboard4')">Settings</button>
+      <button onclick="navigate('dashboard5')">Profile</button>
+      <button onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Dashboard Pages -->
+    <section id="dashboard1" class="page hidden"><h2>Overview</h2></section>
+    <section id="dashboard2" class="page hidden"><h2>Analytics</h2></section>
+    <section id="dashboard3" class="page hidden"><h2>Reports</h2></section>
+    <section id="dashboard4" class="page hidden"><h2>Settings</h2></section>
+    <section id="dashboard5" class="page hidden"><h2>Profile</h2><div id="userProfile"></div></section>
+  </div>
+
 <section id="login" class="page">
   <h1>Login</h1>
   <form id="loginForm" aria-label="Login Form">
@@ -285,3 +335,8 @@
     })('92229851-01d2-455a-46ae-0e2efbb02051');
   }
 </script>
+
+  
+  
+</body>
+</html>
