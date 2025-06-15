@@ -13,10 +13,10 @@
     <!-- Login Page -->
     <section id="login" class="page">
       <h1>Login</h1>
-      <form id="loginForm">
-        <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Login</button>
+      <form id="loginForm" aria-label="Login Form">
+        <input type="text" id="username" placeholder="Username" required aria-label="Username" />
+        <input type="password" id="password" placeholder="Password" required aria-label="Password" />
+        <button type="submit" id="login-btn">Login</button>
       </form>
     </section>
 
@@ -24,98 +24,70 @@
     <section id="admin" class="page hidden">
       <h1>Admin Panel</h1>
       <div>
-        <label>Configure Access:</label>
-        <textarea id="accessConfig"></textarea>
-        <button onclick="saveAccessConfig()">Save</button>
+        <label for="accessConfig">Configure Access:</label>
+        <textarea id="accessConfig" aria-label="Access Configuration"></textarea>
+        <button onclick="saveAccessConfig()" id="save-access-btn">Save</button>
       </div>
     </section>
 
     <!-- Navigation -->
     <nav id="nav" class="hidden">
-      <button onclick="navigate('dashboard1')">Overview</button>
-      <button onclick="navigate('dashboard2')">Analytics</button>
-      <button onclick="navigate('dashboard3')">Reports</button>
-      <button onclick="navigate('dashboard4')">Settings</button>
-      <button onclick="navigate('dashboard5')">Profile</button>
-      <button onclick="logout()">Logout</button>
+      <button onclick="navigate('dashboard1')" id="nav-overview">Overview</button>
+      <button onclick="navigate('dashboard2')" id="nav-analytics">Analytics</button>
+      <button onclick="navigate('dashboard3')" id="nav-reports">Reports</button>
+      <button onclick="navigate('dashboard4')" id="nav-settings">Settings</button>
+      <button onclick="navigate('dashboard5')" id="nav-profile">Profile</button>
+      <button onclick="logout()" id="logout-btn">Logout</button>
     </nav>
 
     <!-- Dashboard Pages -->
-    <section id="dashboard1" class="page hidden"><h2>Overview</h2></section>
-    <section id="dashboard2" class="page hidden"><h2>Analytics</h2></section>
-    <section id="dashboard3" class="page hidden"><h2>Reports</h2></section>
-    <section id="dashboard4" class="page hidden"><h2>Settings</h2></section>
-    <section id="dashboard5" class="page hidden"><h2>Profile</h2><div id="userProfile"></div></section>
+    <section id="dashboard1" class="page hidden">
+      <h2>Overview</h2>
+      <div class="flex-grid">
+        <div class="card" id="info-card" aria-label="Info Card">
+          <h3>Welcome to Pendo Learning Zone</h3>
+          <p>This is a demo zone for practicing Pendo tagging with various HTML elements.</p>
+        </div>
+        <div class="card tooltip" data-tooltip="Pendo Taggable Image" id="image-card">
+          <img src="https://via.placeholder.com/300x150" alt="Demo Screenshot" class="tag-demo" id="tag-image" aria-label="Demo Image">
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard2" class="page hidden">
+      <h2>Analytics</h2>
+      <button id="analytics-refresh" aria-label="Refresh Analytics">Refresh</button>
+      <select id="chart-select" aria-label="Chart Selection">
+        <option value="line">Line Chart</option>
+        <option value="bar">Bar Chart</option>
+      </select>
+    </section>
+
+    <section id="dashboard3" class="page hidden">
+      <h2>Reports</h2>
+      <div class="card" id="report-card" aria-label="Sample Report">
+        <p>This is a sample report block with a hover effect.</p>
+      </div>
+    </section>
+
+    <section id="dashboard4" class="page hidden">
+      <h2>Settings</h2>
+      <form aria-label="Settings Form">
+        <label for="language-select">Language</label>
+        <select id="language-select" aria-label="Language Dropdown">
+          <option value="en">English</option>
+          <option value="fr">French</option>
+        </select>
+        <label for="notifications">Enable Notifications</label>
+        <input type="checkbox" id="notifications" aria-label="Notifications Toggle" />
+        <button type="submit">Save Settings</button>
+      </form>
+    </section>
+
+    <section id="dashboard5" class="page hidden">
+      <h2>Profile</h2>
+      <div id="userProfile" aria-label="User Profile Details"></div>
+    </section>
   </div>
-
-  <script>
-    const users = [
-      { username: 'admin', password: 'admin123', role: 'admin', accountId: 'A001', accountName: 'Global Corp', firstName: 'Alice', lastName: 'Admin' },
-      { username: 'user1', password: 'user123', role: 'user', accountId: 'U001', accountName: 'Local Ltd', firstName: 'Bob', lastName: 'User' }
-    ];
-
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let lastVisited = localStorage.getItem('lastVisitedPage') || 'dashboard1';
-
-    window.onload = () => {
-      if (currentUser) {
-        postLoginSetup(lastVisited);
-      }
-    };
-
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const user = users.find(u => u.username === username && u.password === password);
-      if (user) {
-        currentUser = user;
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        postLoginSetup();
-      } else {
-        alert('Invalid login');
-      }
-    });
-
-    function postLoginSetup(page = 'dashboard1') {
-      document.getElementById('login').classList.add('hidden');
-      document.getElementById('nav').classList.remove('hidden');
-      if (currentUser.role === 'admin') document.getElementById('admin').classList.remove('hidden');
-      navigate(page);
-      renderProfile();
-    }
-
-    function navigate(sectionId) {
-      localStorage.setItem('lastVisitedPage', sectionId);
-      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-      const page = document.getElementById(sectionId);
-      if (page) page.classList.remove('hidden');
-    }
-
-    function logout() {
-      currentUser = null;
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('lastVisitedPage');
-      document.getElementById('nav').classList.add('hidden');
-      document.getElementById('admin').classList.add('hidden');
-      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-      document.getElementById('login').classList.remove('hidden');
-    }
-
-    function renderProfile() {
-      if (!currentUser) return;
-      const profile = `
-        <p>Account ID: ${currentUser.accountId}</p>
-        <p>Account Name: ${currentUser.accountName}</p>
-        <p>Name: ${currentUser.firstName} ${currentUser.lastName}</p>
-        <p>Role: ${currentUser.role}</p>
-      `;
-      document.getElementById('userProfile').innerHTML = profile;
-    }
-
-    function saveAccessConfig() {
-      alert('Access configuration saved. (Mock implementation)');
-    }
-  </script>
 </body>
 </html>
