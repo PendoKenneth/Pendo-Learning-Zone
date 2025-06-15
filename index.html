@@ -11,14 +11,14 @@
 <body>
   <div id="app">
     <!-- Login Page -->
-    <section id="login" class="page">
-      <h1>Login</h1>
-      <form id="loginForm">
-        <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
-    </section>
+<section id="login" class="page">
+  <h1>Login</h1>
+  <form id="loginForm" aria-label="Login Form">
+    <input type="text" id="username" placeholder="Username" required aria-label="Username" required/>
+    <input type="password" id="password" placeholder="Password" required aria-label="Password" required/>
+    <button type="submit" id="login-btn">Login</button>
+  </form>
+</section>
 
     <!-- Admin Page -->
     <section id="admin" class="page hidden">
@@ -47,15 +47,6 @@
     <section id="dashboard4" class="page hidden"><h2>Settings</h2></section>
     <section id="dashboard5" class="page hidden"><h2>Profile</h2><div id="userProfile"></div></section>
   </div>
-
-<section id="login" class="page">
-  <h1>Login</h1>
-  <form id="loginForm" aria-label="Login Form">
-    <input type="text" id="username" placeholder="Username" required aria-label="Username" />
-    <input type="password" id="password" placeholder="Password" required aria-label="Password" />
-    <button type="submit" id="login-btn">Login</button>
-  </form>
-</section>
 
 <section id="dashboard4" class="page hidden">
   <h2>Settings</h2>
@@ -309,34 +300,8 @@
   });
 </script>
 </section>
-<script>
-  function injectPendo(user) {
-    (function(apiKey){
-      (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
-      v=['initialize','identify','updateOptions','pageLoad','track'];
-      for(w=0,x=v.length;w<x;++w)(function(m){
-        o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};
-      })(v[w]);
-      y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/92229851-01d2-455a-46ae-0e2efbb02051/pendo.js';
-      z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);
-      })(window,document,'script','pendo');
 
-      pendo.initialize({
-        visitor: {
-          id: user.username,
-          role: user.role,
-          full_name: user.firstName + ' ' + user.lastName
-        },
-        account: {
-          id: user.accountId,
-          name: user.accountName
-        }
-      });
-    })('92229851-01d2-455a-46ae-0e2efbb02051');
-  }
-</script>
 
-  
-  
-</body>
+
+  </body>
 </html>
