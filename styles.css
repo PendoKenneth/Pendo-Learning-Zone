@@ -1,1 +1,93 @@
+/* styles.css - Hybrid Theme for Pendo Learning Zone */
+
+:root {
+  --primary-bg: #f4f4f4;
+  --secondary-bg: #1e1e2f;
+  --primary-text: #1a1a1a;
+  --secondary-text: #f0f0f0;
+  --accent: #4f46e5;
+  --border: #ccc;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--primary-bg);
+  color: var(--primary-text);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+#app {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page {
+  display: none;
+}
+
+.page:not(.hidden) {
+  display: block;
+}
+
+nav {
+  background: var(--secondary-bg);
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+nav button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+nav button:hover {
+  opacity: 0.85;
+}
+
+form input,
+form textarea,
+form button {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  opacity: 0.9;
+}
+
+#userProfile p {
+  margin: 0.3rem 0;
+}
 
