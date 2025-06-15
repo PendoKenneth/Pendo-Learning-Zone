@@ -42,6 +42,10 @@ body {
   display: block;
 }
 
+.hidden {
+  display: none !important;
+}
+
 nav {
   background: var(--secondary-bg);
   padding: 1rem;
@@ -141,7 +145,42 @@ img.tag-demo {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
+  z-index: 1000;
 }
 .tooltip:hover::after {
   opacity: 1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+th {
+  background: var(--secondary-bg);
+  color: var(--secondary-text);
+}
+
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+legend {
+  font-weight: bold;
+  padding: 0 0.5rem;
+}
+
+mark {
+  background-color: yellow;
+  padding: 0.1rem;
 }
