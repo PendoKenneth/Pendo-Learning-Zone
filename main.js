@@ -29,7 +29,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 function postLoginSetup(page = 'dashboard1') {
   document.getElementById('login').classList.add('hidden');
   document.getElementById('nav').classList.remove('hidden');
-  if (currentUser.role === 'admin') document.getElementById('admin').classList.remove('hidden');
+  if (currentUser.role === 'admin') document.getElementById('admin')?.classList.remove('hidden');
   navigate(page);
   renderProfile();
 }
@@ -46,7 +46,7 @@ function logout() {
   localStorage.removeItem('currentUser');
   localStorage.removeItem('lastVisitedPage');
   document.getElementById('nav').classList.add('hidden');
-  document.getElementById('admin').classList.add('hidden');
+  document.getElementById('admin')?.classList.add('hidden');
   document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
   document.getElementById('login').classList.remove('hidden');
 }
