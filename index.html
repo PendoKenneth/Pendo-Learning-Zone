@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,21 +10,26 @@
 <body>
   <div id="app">
     <!-- Login Page -->
-<section id="login" class="page">
-  <h1>Login</h1>
-  <form id="loginForm" aria-label="Login Form">
-    <input type="text" id="username" placeholder="Username" required aria-label="Username" required/>
-    <input type="password" id="password" placeholder="Password" required aria-label="Password" required/>
-    <button type="submit" id="login-btn">Login</button>
-  </form>
-</section>
+    <section id="login" class="page">
+      <h1>Login</h1>
+      <form id="loginForm" aria-label="Login Form">
+        <input type="text" id="username" placeholder="Username" required aria-label="Username" />
+        <input type="password" id="password" placeholder="Password" required aria-label="Password" />
+        <button type="submit" id="login-btn">Login</button>
+      </form>
+      <div style="margin-top: 1rem; padding: 1rem; background: #f9f9f9; border-radius: 4px;">
+        <h3>Test Credentials:</h3>
+        <p><strong>Admin:</strong> username: admin, password: admin123</p>
+        <p><strong>User:</strong> username: user1, password: user123</p>
+      </div>
+    </section>
 
     <!-- Admin Page -->
     <section id="admin" class="page hidden">
       <h1>Admin Panel</h1>
-      <div>
-        <label>Configure Access:</label>
-        <textarea id="accessConfig"></textarea>
+      <div class="card">
+        <label for="accessConfig">Configure Access:</label>
+        <textarea id="accessConfig" placeholder="Enter access configuration..."></textarea>
         <button onclick="saveAccessConfig()">Save</button>
       </div>
     </section>
@@ -35,273 +39,224 @@
       <button onclick="navigate('dashboard1')">Overview</button>
       <button onclick="navigate('dashboard2')">Analytics</button>
       <button onclick="navigate('dashboard3')">Reports</button>
+      <button onclick="navigate('productCatalogue')">Products</button>
       <button onclick="navigate('dashboard4')">Settings</button>
       <button onclick="navigate('dashboard5')">Profile</button>
       <button onclick="logout()">Logout</button>
     </nav>
 
-    <!-- Dashboard Pages -->
-    <section id="dashboard1" class="page hidden"><h2>Overview</h2></section>
-    <section id="dashboard2" class="page hidden"><h2>Analytics</h2></section>
-    <section id="dashboard3" class="page hidden"><h2>Reports</h2></section>
-    <section id="dashboard4" class="page hidden"><h2>Settings</h2></section>
-    <section id="dashboard5" class="page hidden"><h2>Profile</h2><div id="userProfile"></div></section>
+    <!-- Dashboard 1: Overview -->
+    <section id="dashboard1" class="page hidden">
+      <h2>Overview</h2>
+      <div class="flex-grid">
+        <div class="card" id="info-card" aria-label="Info Card">
+          <h3>Welcome to Pendo Learning Zone</h3>
+          <p>This is a demo zone for practicing Pendo tagging with various HTML elements.</p>
+        </div>
+        <div class="card tooltip" data-tooltip="Pendo Taggable Image" id="image-card">
+          <img src="https://via.placeholder.com/300x150" alt="Demo Screenshot" class="tag-demo" id="tag-image" aria-label="Demo Image">
+        </div>
+      </div>
+      <div class="card">
+        <h3>Live Revenue Graph</h3>
+        <img src="https://via.placeholder.com/600x200?text=Mock+Line+Graph" alt="Mock Line Graph of Revenue Trends" class="tag-demo">
+      </div>
+      <div class="card">
+        <h3>Sales Conversion Funnel</h3>
+        <img src="https://via.placeholder.com/600x200?text=Mock+Funnel+Chart" alt="Mock Funnel Chart for Sales" class="tag-demo">
+      </div>
+    </section>
+
+    <!-- Dashboard 2: Analytics -->
+    <section id="dashboard2" class="page hidden">
+      <h2>Analytics</h2>
+      <div class="card">
+        <button class="tooltip" data-tooltip="Click to refresh charts" id="analytics-refresh">Refresh Charts</button>
+        <select id="chart-select" aria-label="Chart Selection">
+          <option value="line">Line Chart</option>
+          <option value="bar">Bar Chart</option>
+          <option value="pie">Pie Chart</option>
+        </select>
+        <form aria-label="Data Range Filter">
+          <label for="start-date">Start Date</label>
+          <input type="date" id="start-date" />
+          <label for="end-date">End Date</label>
+          <input type="date" id="end-date" />
+          <button type="submit">Filter</button>
+        </form>
+        <table border="1" aria-label="Analytics Table">
+          <thead>
+            <tr><th>Metric</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Visitors</td><td>3,200</td></tr>
+            <tr><td>Conversions</td><td>740</td></tr>
+            <tr><td>Bounce Rate</td><td>45%</td></tr>
+          </tbody>
+        </table>
+        <div class="tooltip" data-tooltip="Trended analysis shows changes over time">
+          <span id="analytics-insight">Hover for insights</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard 3: Reports -->
+    <section id="dashboard3" class="page hidden">
+      <h2>Reports</h2>
+      <div class="card" id="report-card" aria-label="Sample Report">
+        <p>This is a sample report block with a hover effect.</p>
+        <a href="#" id="download-link">Download Report</a>
+        <div>
+          <button id="report-email">Email Report</button>
+          <button id="report-export">Export CSV</button>
+        </div>
+        <form aria-label="Custom Report Generator">
+          <label for="report-type">Report Type</label>
+          <select id="report-type">
+            <option>Sales Summary</option>
+            <option>Device Inventory</option>
+            <option>Support Requests</option>
+          </select>
+          <label for="region">Region</label>
+          <input type="text" id="region" placeholder="Region name" />
+          <label><input type="checkbox" id="include-charts" /> Include charts</label>
+          <button type="submit">Generate</button>
+        </form>
+        <div class="tooltip" data-tooltip="Export formats: CSV, PDF, XLS">
+          <span id="report-note">Output formats</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Catalogue -->
+    <section id="productCatalogue" class="page hidden">
+      <h2>Product Catalogue</h2>
+      <div class="card">
+        <h3>Filter and Sort</h3>
+        <form id="productFilterForm">
+          <label for="searchInput">Search:</label>
+          <input type="text" id="searchInput" placeholder="Enter keyword...">
+          <label for="categoryFilter">Category:</label>
+          <select id="categoryFilter">
+            <option value="">All</option>
+            <option value="Audio">Audio</option>
+            <option value="Home Automation">Home Automation</option>
+          </select>
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy">
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="stock">Stock</option>
+          </select>
+          <button type="submit">Apply</button>
+        </form>
+      </div>
+      
+      <table border="1" aria-label="Product Table" id="productTable">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SKU1001</td>
+            <td>Smart Speaker A1</td>
+            <td>Audio</td>
+            <td>$99.99</td>
+            <td>52</td>
+            <td><button class="tooltip" data-tooltip="Add to cart">Add</button></td>
+          </tr>
+          <tr>
+            <td>SKU1042</td>
+            <td>Wireless Headphones X3</td>
+            <td>Audio</td>
+            <td>$149.99</td>
+            <td>30</td>
+            <td><button class="tooltip" data-tooltip="Add to cart">Add</button></td>
+          </tr>
+          <tr>
+            <td>SKU1123</td>
+            <td>Smart Thermostat Z2</td>
+            <td>Home Automation</td>
+            <td>$199.00</td>
+            <td>15</td>
+            <td><button class="tooltip" data-tooltip="Add to cart">Add</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="card">
+        <h3>Promotional Banner</h3>
+        <div class="tooltip" data-tooltip="Seasonal deals and discounts">
+          <span>Get 10% off on all Home Automation devices through July!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard 4: Settings -->
+    <section id="dashboard4" class="page hidden">
+      <h2>Settings</h2>
+      <form aria-label="Settings Form">
+        <label for="language-select">Language</label>
+        <select id="language-select" aria-label="Language Dropdown">
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+        </select>
+
+        <label for="notifications">Enable Notifications</label>
+        <input type="checkbox" id="notifications" aria-label="Notifications Toggle" />
+
+        <label for="timezone">Time Zone</label>
+        <select id="timezone">
+          <option value="UTC">UTC</option>
+          <option value="EST">Eastern Standard Time</option>
+          <option value="PST">Pacific Standard Time</option>
+        </select>
+
+        <fieldset>
+          <legend>Theme Preferences</legend>
+          <label><input type="radio" name="theme" value="light" checked /> Light</label>
+          <label><input type="radio" name="theme" value="dark" /> Dark</label>
+          <label><input type="radio" name="theme" value="hybrid" /> Hybrid</label>
+        </fieldset>
+
+        <div class="tooltip" data-tooltip="Save to apply changes on next login">
+          <button type="submit">Save Settings</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Dashboard 5: Profile -->
+    <section id="dashboard5" class="page hidden">
+      <h2>Profile</h2>
+      <div id="userProfile" aria-label="User Profile Details"></div>
+
+      <div class="card">
+        <h3>Contact Info</h3>
+        <p>Email: <a href="mailto:user@example.com">user@example.com</a></p>
+        <p>Phone: <span>(123) 456-7890</span></p>
+      </div>
+
+      <div class="card">
+        <h3>Account Preferences</h3>
+        <form aria-label="Profile Preferences">
+          <label for="display-name">Display Name</label>
+          <input type="text" id="display-name" placeholder="Your name" />
+
+          <label for="bio">Bio</label>
+          <textarea id="bio" placeholder="Tell us about yourself..."></textarea>
+
+          <button type="submit">Update Profile</button>
+        </form>
+      </div>
+    </section>
   </div>
-
-<section id="dashboard4" class="page hidden">
-  <h2>Settings</h2>
-  <form aria-label="Settings Form">
-    <label for="language-select">Language</label>
-    <select id="language-select" aria-label="Language Dropdown">
-      <option value="en">English</option>
-      <option value="fr">French</option>
-      <option value="de">German</option>
-    </select>
-
-    <label for="notifications">Enable Notifications</label>
-    <input type="checkbox" id="notifications" aria-label="Notifications Toggle" />
-
-    <label for="timezone">Time Zone</label>
-    <select id="timezone">
-      <option value="UTC">UTC</option>
-      <option value="EST">Eastern Standard Time</option>
-      <option value="PST">Pacific Standard Time</option>
-    </select>
-
-    <fieldset>
-      <legend>Theme Preferences</legend>
-      <label><input type="radio" name="theme" value="light" checked /> Light</label>
-      <label><input type="radio" name="theme" value="dark" /> Dark</label>
-      <label><input type="radio" name="theme" value="hybrid" /> Hybrid</label>
-    </fieldset>
-
-    <div class="tooltip" data-tooltip="Save to apply changes on next login">
-      <button type="submit">Save Settings</button>
-    </div>
-  </form>
-</section>
-
-<section id="dashboard5" class="page hidden">
-  <h2>Profile</h2>
-  <div id="userProfile" aria-label="User Profile Details"></div>
-
-  <div class="card">
-    <h3>Contact Info</h3>
-    <p>Email: <a href="mailto:user@example.com">user@example.com</a></p>
-    <p>Phone: <span>(123) 456-7890</span></p>
-  </div>
-
-  <div class="card">
-    <h3>Account Preferences</h3>
-    <form aria-label="Profile Preferences">
-      <label for="display-name">Display Name</label>
-      <input type="text" id="display-name" placeholder="Your name" />
-
-      <label for="bio">Bio</label>
-      <textarea id="bio" placeholder="Tell us about yourself..."></textarea>
-
-      <button type="submit">Update Profile</button>
-    </form>
-  </div>
-</section>
-
-<section id="dashboard1" class="page hidden">
-  <h2>Overview</h2>
-  <div class="flex-grid">
-    <div class="card" id="info-card" aria-label="Info Card">
-      <h3>Welcome to Pendo Learning Zone</h3>
-      <p>This is a demo zone for practicing Pendo tagging with various HTML elements.</p>
-    </div>
-    <div class="card tooltip" data-tooltip="Pendo Taggable Image" id="image-card">
-      <img src="https://via.placeholder.com/300x150" alt="Demo Screenshot" class="tag-demo" id="tag-image" aria-label="Demo Image">
-    </div>
-  </div>
-  <div class="card">
-    <h3>Live Revenue Graph</h3>
-    <img src="https://via.placeholder.com/600x200?text=Mock+Line+Graph" alt="Mock Line Graph of Revenue Trends" class="tag-demo">
-  </div>
-  <div class="card">
-    <h3>Sales Conversion Funnel</h3>
-    <img src="https://via.placeholder.com/600x200?text=Mock+Funnel+Chart" alt="Mock Funnel Chart for Sales" class="tag-demo">
-  </div>
-</section>
-
-<section id="dashboard2" class="page hidden">
-  <h2>Analytics</h2>
-  <div class="card">
-    <button class="tooltip" data-tooltip="Click to refresh charts" id="analytics-refresh">Refresh Charts</button>
-    <select id="chart-select" aria-label="Chart Selection">
-      <option value="line">Line Chart</option>
-      <option value="bar">Bar Chart</option>
-      <option value="pie">Pie Chart</option>
-    </select>
-    <form aria-label="Data Range Filter">
-      <label for="start-date">Start Date</label>
-      <input type="date" id="start-date" />
-      <label for="end-date">End Date</label>
-      <input type="date" id="end-date" />
-      <button type="submit">Filter</button>
-    </form>
-    <table border="1" aria-label="Analytics Table">
-      <thead>
-        <tr><th>Metric</th><th>Value</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Visitors</td><td>3,200</td></tr>
-        <tr><td>Conversions</td><td>740</td></tr>
-        <tr><td>Bounce Rate</td><td>45%</td></tr>
-      </tbody>
-    </table>
-    <div class="tooltip" data-tooltip="Trended analysis shows changes over time">
-      <span id="analytics-insight">Hover for insights</span>
-    </div>
-  </div>
-</section>
-
-<section id="dashboard3" class="page hidden">
-  <h2>Reports</h2>
-  <div class="card" id="report-card" aria-label="Sample Report">
-    <p>This is a sample report block with a hover effect.</p>
-    <a href="#" id="download-link">Download Report</a>
-    <div>
-      <button id="report-email">Email Report</button>
-      <button id="report-export">Export CSV</button>
-    </div>
-    <form aria-label="Custom Report Generator">
-      <label for="report-type">Report Type</label>
-      <select id="report-type">
-        <option>Sales Summary</option>
-        <option>Device Inventory</option>
-        <option>Support Requests</option>
-      </select>
-      <label for="region">Region</label>
-      <input type="text" id="region" placeholder="Region name" />
-      <label><input type="checkbox" id="include-charts" /> Include charts</label>
-      <button type="submit">Generate</button>
-    </form>
-    <div class="tooltip" data-tooltip="Export formats: CSV, PDF, XLS">
-      <span id="report-note">Output formats</span>
-    </div>
-  </div>
-</section>
-
-<section id="productCatalogue" class="page hidden">
-  <h2>Product Catalogue</h2>
-  <table border="1" aria-label="Product Table">
-    <thead>
-      <tr>
-        <th>Product ID</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>SKU1001</td>
-        <td>Smart Speaker A1</td>
-        <td>Audio</td>
-        <td>$99.99</td>
-        <td>52</td>
-        <td><button class="tooltip" data-tooltip="Add to cart">Add</button></td>
-      </tr>
-      <tr>
-        <td>SKU1042</td>
-        <td>Wireless Headphones X3</td>
-        <td>Audio</td>
-        <td>$149.99</td>
-        <td>30</td>
-        <td><button class="tooltip" data-tooltip="Add to cart">Add</button></td>
-      </tr>
-      <tr>
-        <td>SKU1123</td>
-        <td>Smart Thermostat Z2</td>
-        <td>Home Automation</td>
-        <td>$199.00</td>
-        <td>15</td>
-        <td><button class="tooltip" data-tooltip="Add to cart">Add</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="card">
-    <h3>Promotional Banner</h3>
-    <div class="tooltip" data-tooltip="Seasonal deals and discounts">
-      <span>Get 10% off on all Home Automation devices through July!</span>
-    </div>
-  </div>
-<div class="card">
-  <h3>Filter and Sort</h3>
-  <form id="productFilterForm">
-    <label for="searchInput">Search:</label>
-    <input type="text" id="searchInput" placeholder="Enter keyword...">
-    <label for="categoryFilter">Category:</label>
-    <select id="categoryFilter">
-      <option value="">All</option>
-      <option value="Audio">Audio</option>
-      <option value="Home Automation">Home Automation</option>
-    </select>
-
-    <label for="sortBy">Sort by:</label>
-    <select id="sortBy">
-      <option value="name">Name</option>
-      <option value="price">Price</option>
-      <option value="stock">Stock</option>
-    </select>
-
-    <button type="submit">Apply</button>
-  </form>
-</div>
-<script>
-  document.getElementById('productFilterForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const category = document.getElementById('categoryFilter').value;
-    const sortBy = document.getElementById('sortBy').value;
-    const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
-
-    const rows = Array.from(document.querySelectorAll('#productCatalogue table tbody tr'));
-
-    const filtered = rows.filter(row => {
-      const cat = row.children[2].textContent.trim();
-      const matchesCategory = !category || cat === category;
-      const matchesKeyword = !keyword || row.textContent.toLowerCase().includes(keyword);
-      return matchesCategory && matchesKeyword;
-    });
-
-    const getValue = (cell, key) => {
-      const text = cell.textContent.trim();
-      if (key === 'price') return parseFloat(text.replace('$', ''));
-      if (key === 'stock') return parseInt(text);
-      return text.toLowerCase();
-    };
-
-    filtered.sort((a, b) => {
-      const valA = getValue(a.children[sortBy === 'name' ? 1 : sortBy === 'price' ? 3 : 4], sortBy);
-      const valB = getValue(b.children[sortBy === 'name' ? 1 : sortBy === 'price' ? 3 : 4], sortBy);
-      return valA > valB ? 1 : valA < valB ? -1 : 0;
-    });
-
-    const highlightMatch = (html, keyword) => {
-      if (!keyword) return html;
-      const regex = new RegExp(`(${keyword})`, 'gi');
-      return html.replace(regex, '<mark>$1</mark>');
-    };
-
-    const tbody = document.querySelector('#productCatalogue table tbody');
-    tbody.innerHTML = '';
-    filtered.forEach(row => {
-      const newRow = row.cloneNode(true);
-      Array.from(newRow.children).forEach(cell => {
-        cell.innerHTML = highlightMatch(cell.innerHTML, keyword);
-      });
-      tbody.appendChild(newRow);
-    });
-  });
-</script>
-</section>
-
-
-
-  </body>
+</body>
 </html>
