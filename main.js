@@ -27,6 +27,15 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 });
 
 function postLoginSetup(page = 'dashboard1') {
+  injectPendo(currentUser || {
+    username: null,
+    role: null,
+    firstName: null,
+    lastName: null,
+    accountId: null,
+    accountName: null
+  });
+
   document.getElementById('login').classList.add('hidden');
   document.getElementById('nav').classList.remove('hidden');
   if (currentUser.role === 'admin') document.getElementById('admin')?.classList.remove('hidden');
