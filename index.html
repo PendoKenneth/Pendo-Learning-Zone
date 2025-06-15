@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pendo Learning Zone</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="main.js"></script>
-</head>
-<body>
-  <div id="app">
-    <!-- Navigation -->
-    <nav id="nav" class="hidden">
-      <button onclick="navigate('dashboard1')" id="nav-overview">Overview</button>
-      <button onclick="navigate('dashboard2')" id="nav-analytics">Analytics</button>
-      <button onclick="navigate('dashboard3')" id="nav-reports">Reports</button>
-      <button onclick="navigate('dashboard4')" id="nav-settings">Settings</button>
-      <button onclick="navigate('dashboard5')" id="nav-profile">Profile</button>
-      <button onclick="navigate('productCatalogue')" id="nav-catalogue">Catalogue</button>
-      <button onclick="logout()" id="logout-btn">Logout</button>
-    </nav>
-
-    <!-- Pages -->
- <section id="login" class="page">
+<section id="login" class="page">
   <h1>Login</h1>
   <form id="loginForm" aria-label="Login Form">
     <input type="text" id="username" placeholder="Username" required aria-label="Username" />
@@ -30,7 +7,7 @@
   </form>
 </section>
 
-  <section id="dashboard4" class="page hidden">
+<section id="dashboard4" class="page hidden">
   <h2>Settings</h2>
   <form aria-label="Settings Form">
     <label for="language-select">Language</label>
@@ -282,9 +259,29 @@
   });
 </script>
 </section>
+<script>
+  function injectPendo(user) {
+    (function(apiKey){
+      (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+      v=['initialize','identify','updateOptions','pageLoad','track'];
+      for(w=0,x=v.length;w<x;++w)(function(m){
+        o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};
+      })(v[w]);
+      y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/92229851-01d2-455a-46ae-0e2efbb02051/pendo.js';
+      z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);
+      })(window,document,'script','pendo');
 
-
-
-  </div>
-</body>
-</html>
+      pendo.initialize({
+        visitor: {
+          id: user.username,
+          role: user.role,
+          full_name: user.firstName + ' ' + user.lastName
+        },
+        account: {
+          id: user.accountId,
+          name: user.accountName
+        }
+      });
+    })('92229851-01d2-455a-46ae-0e2efbb02051');
+  }
+</script>
