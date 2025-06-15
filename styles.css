@@ -7,6 +7,9 @@
   --secondary-text: #f0f0f0;
   --accent: #4f46e5;
   --border: #ccc;
+  --hover-bg: #e0e0ff;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -26,16 +29,15 @@ body {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 2rem;
-  max-width: 800px;
+  max-width: 960px;
   width: 100%;
   margin: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--card-shadow);
 }
 
 .page {
   display: none;
 }
-
 .page:not(.hidden) {
   display: block;
 }
@@ -49,7 +51,6 @@ nav {
   border-radius: 4px;
   margin-bottom: 1rem;
 }
-
 nav button {
   background: var(--accent);
   color: white;
@@ -59,14 +60,15 @@ nav button {
   cursor: pointer;
   font-weight: 500;
 }
-
 nav button:hover {
-  opacity: 0.85;
+  background: var(--hover-bg);
+  color: var(--primary-text);
 }
 
 form input,
 form textarea,
-form button {
+form button,
+select {
   display: block;
   margin: 0.5rem 0;
   padding: 0.5rem;
@@ -74,7 +76,6 @@ form button {
   box-sizing: border-box;
   font-size: 1rem;
 }
-
 form button {
   background: var(--accent);
   color: white;
@@ -82,7 +83,6 @@ form button {
   border-radius: 4px;
   cursor: pointer;
 }
-
 form button:hover {
   opacity: 0.9;
 }
@@ -91,3 +91,57 @@ form button:hover {
   margin: 0.3rem 0;
 }
 
+.card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px var(--card-shadow);
+  margin: 1rem 0;
+}
+.card:hover {
+  background-color: var(--hover-bg);
+}
+
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.flex-grid .card {
+  flex: 1 1 calc(48% - 1rem);
+  min-width: 240px;
+}
+
+img.tag-demo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #333;
+  color: #fff;
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.tooltip:hover::after {
+  opacity: 1;
+}
